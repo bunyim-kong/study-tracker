@@ -1,0 +1,325 @@
+.styleguide {
+  width: min(100% - 2rem, 1520px);
+  margin-inline: auto;
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.styleguide__intro {
+  max-width: 1120px;
+  margin: 0 auto var(--space-7);
+}
+
+.styleguide__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.styleguide__logo {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px 14px 18px 18px;
+  background: var(--color-copper);
+  box-shadow: 0 3px 0 var(--color-copper-edge);
+  color: var(--color-on-copper);
+  font-size: var(--font-size-sm);
+}
+
+.styleguide__title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.styleguide__title-row h1 {
+  max-width: 720px;
+  margin-bottom: var(--space-2);
+}
+
+.styleguide__title-row p {
+  max-width: 620px;
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.preview-list {
+  display: grid;
+  grid-template-columns: minmax(300px, 375px) minmax(0, 1fr);
+  align-items: start;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.preview {
+  width: 100%;
+  margin-inline: auto;
+  border: 1px solid rgb(241 244 255 / 14%);
+  border-radius: 2rem;
+  overflow: hidden;
+  background: var(--color-bg-deep);
+  box-shadow: 0 26px 70px rgb(7 12 27 / 30%);
+}
+
+[data-theme='light'] .preview {
+  border-color: rgb(36 48 82 / 14%);
+}
+
+.preview--phone {
+  max-width: 375px;
+}
+
+.preview--laptop {
+  max-width: 1024px;
+}
+
+.preview__bar {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-4);
+  border-bottom: 1px solid rgb(241 244 255 / 10%);
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.preview__canvas {
+  min-width: 0;
+  padding: var(--space-4);
+  background:
+    radial-gradient(ellipse at 8% 4%, rgb(255 255 255 / 4%) 0 8%, transparent 8.5%),
+    radial-gradient(circle at 92% 7%, rgb(255 216 77 / 9%) 0 2px, transparent 3px),
+    var(--color-bg);
+}
+
+.showcase {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.showcase__hero {
+  min-height: 330px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.showcase__hero::before,
+.showcase__hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 4%);
+}
+
+.showcase__hero::before {
+  width: 180px;
+  height: 70px;
+  right: -30px;
+  top: 22px;
+}
+
+.showcase__hero::after {
+  width: 90px;
+  height: 38px;
+  right: 90px;
+  top: 55px;
+}
+
+.showcase__hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.showcase__hero p {
+  max-width: 55ch;
+  color: var(--color-muted);
+}
+
+.showcase__hero .mascot {
+  justify-self: center;
+}
+
+.showcase__eyebrow {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.showcase__section > h2,
+.showcase__heading h2 {
+  margin-bottom: var(--space-4);
+}
+
+.showcase__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.showcase__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.7rem;
+  background: rgb(255 216 77 / 15%);
+  color: var(--color-yellow);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.showcase__chip--done {
+  background: rgb(74 222 128 / 15%);
+  color: var(--color-green-text);
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.mood-card {
+  display: grid;
+  justify-items: center;
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.mood-card strong {
+  margin-top: calc(var(--space-2) * -1);
+  font-size: var(--font-size-sm);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.card-grid h3 {
+  margin-block: var(--space-4) var(--space-1);
+}
+
+.showcase__muted {
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+}
+
+.progress-stack {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.celebration-card {
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  text-align: left;
+}
+
+.celebration-card h3 {
+  margin-bottom: 0;
+}
+
+.celebration-card p {
+  color: var(--color-muted);
+}
+
+.showcase--compact {
+  gap: var(--space-6);
+}
+
+.showcase--compact .showcase__hero {
+  min-height: 0;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+
+.showcase--compact .showcase__hero .mascot {
+  grid-row: 1;
+}
+
+.showcase--compact .mood-grid,
+.showcase--compact .card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.showcase--compact .card-grid > :last-child {
+  grid-column: 1 / -1;
+}
+
+.showcase--compact .button-row {
+  display: grid;
+}
+
+.showcase--compact .celebration-card {
+  flex-direction: column;
+  gap: 0;
+  text-align: center;
+}
+
+@media (max-width: 1050px) {
+  .preview-list {
+    grid-template-columns: 1fr;
+  }
+
+  .preview--laptop {
+    order: -1;
+  }
+}
+
+@media (max-width: 680px) {
+  .styleguide {
+    width: min(100% - 1rem, 1520px);
+    padding-top: var(--space-4);
+  }
+
+  .styleguide__title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .styleguide__title-row .button {
+    width: 100%;
+  }
+
+  .preview--laptop .showcase__hero,
+  .preview--laptop .mood-grid,
+  .preview--laptop .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview--laptop .celebration-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

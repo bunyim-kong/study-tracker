@@ -1,0 +1,83 @@
+.button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    translate var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.button--primary {
+  background: var(--color-copper);
+  box-shadow: var(--shadow-button);
+  color: var(--color-on-copper);
+}
+
+.button--primary:hover:not(:disabled) {
+  background: var(--color-copper-hover);
+}
+
+.button--primary:active:not(:disabled) {
+  box-shadow: 0 2px 0 var(--color-copper-edge);
+  translate: 0 2px;
+}
+
+.button--ghost {
+  border: 2px solid rgb(241 244 255 / 24%);
+  background: rgb(241 244 255 / 7%);
+  color: var(--color-text);
+}
+
+[data-theme='light'] .button--ghost {
+  border-color: rgb(36 48 82 / 24%);
+  background: rgb(36 48 82 / 6%);
+}
+
+.button--ghost:hover:not(:disabled) {
+  background: rgb(241 244 255 / 13%);
+}
+
+[data-theme='light'] .button--ghost:hover:not(:disabled) {
+  background: rgb(36 48 82 / 12%);
+}
+
+.button--small {
+  min-height: 44px;
+  padding-inline: var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.button--large {
+  min-height: 56px;
+  padding-inline: var(--space-5);
+  font-size: var(--font-size-lg);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.button__spinner {
+  width: 1.1rem;
+  aspect-ratio: 1;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: button-spin 700ms linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    rotate: 1turn;
+  }
+}

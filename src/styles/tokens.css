@@ -1,0 +1,84 @@
+:root {
+  color-scheme: dark;
+
+  --color-bg: #2a3760;
+  --color-bg-deep: #1f2a4d;
+  --color-card: #364577;
+  --color-card-2: #41528a;
+  --color-yellow: #ffd84d;
+  --color-copper: #d08a52;
+  --color-copper-hover: #dda06f;
+  --color-copper-edge: #9b5f32;
+  --color-on-copper: #2a1a0c;
+  --color-text: #f1f4ff;
+  --color-muted: #c7d0ee;
+  --color-green: #4ade80;
+  --color-green-text: #50e486;
+  --color-danger: #f87171;
+  --color-danger-text: #ffb8b8;
+  --color-focus: #ffe681;
+  --color-scrim: rgb(11 18 39 / 64%);
+
+  --font-heading: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: clamp(1.35rem, 3vw, 1.65rem);
+  --font-size-2xl: clamp(2rem, 6vw, 3.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 8%), 0 16px 40px rgb(8 13 30 / 20%);
+  --shadow-button: 0 4px 0 var(--color-copper-edge), 0 10px 24px rgb(8 13 30 / 22%);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 220ms;
+
+  /* Short aliases keep future feature CSS readable. */
+  --bg: var(--color-bg);
+  --bg-deep: var(--color-bg-deep);
+  --card: var(--color-card);
+  --card-2: var(--color-card-2);
+  --yellow: var(--color-yellow);
+  --copper: var(--color-copper);
+  --text: var(--color-text);
+  --muted: var(--color-muted);
+  --green: var(--color-green);
+  --danger: var(--color-danger);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f4efe5;
+  --color-bg-deep: #e9dfcf;
+  --color-card: #fffaf1;
+  --color-card-2: #f0e6d5;
+  --color-yellow: #765600;
+  --color-copper: #bd6f36;
+  --color-copper-hover: #c47a43;
+  --color-copper-edge: #7f431f;
+  --color-on-copper: #201307;
+  --color-text: #243052;
+  --color-muted: #536083;
+  --color-green: #167542;
+  --color-green-text: #167542;
+  --color-danger: #b42335;
+  --color-danger-text: #b42335;
+  --color-focus: #654700;
+  --color-scrim: rgb(31 42 77 / 30%);
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 90%), 0 16px 40px rgb(68 48 28 / 10%);
+}

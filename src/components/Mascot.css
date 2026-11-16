@@ -1,0 +1,67 @@
+.mascot {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 14px 12px rgb(10 15 34 / 20%));
+  transform-origin: 50% 85%;
+  animation: mascot-breathe 2.8s ease-in-out infinite;
+}
+
+.mascot--cheering {
+  animation: mascot-cheer 700ms var(--ease-out) infinite alternate;
+}
+
+.mascot__wing,
+.mascot__spark,
+.mascot__zzz,
+.mascot__thought {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.mascot--cheering .mascot__wing--left {
+  animation: wing-left 550ms ease-in-out infinite alternate;
+}
+
+.mascot--cheering .mascot__wing--right {
+  animation: wing-right 550ms ease-in-out infinite alternate;
+}
+
+.mascot__zzz {
+  animation: zzz-float 1.8s ease-out infinite;
+}
+
+.mascot__thought {
+  animation: thought-float 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes mascot-breathe {
+  50% { transform: translateY(-3px) rotate(1deg); }
+}
+
+@keyframes mascot-cheer {
+  to { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes wing-left {
+  to { transform: rotate(-8deg); }
+}
+
+@keyframes wing-right {
+  to { transform: rotate(8deg); }
+}
+
+@keyframes zzz-float {
+  to { opacity: 0; transform: translate(4px, -10px); }
+}
+
+@keyframes thought-float {
+  to { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot,
+  .mascot * {
+    animation: none !important;
+  }
+}

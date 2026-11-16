@@ -1,0 +1,43 @@
+.daily-welcome {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--color-scrim);
+  backdrop-filter: blur(8px);
+}
+
+.daily-welcome__card {
+  width: min(100%, 520px);
+  display: grid;
+  justify-items: center;
+  border: 1px solid rgb(241 244 255 / 12%);
+  border-radius: 2rem;
+  padding: var(--space-6);
+  background: var(--color-card);
+  box-shadow: 0 30px 90px rgb(7 12 27 / 45%);
+  text-align: center;
+}
+
+.daily-welcome__card h1 {
+  margin-bottom: var(--space-2);
+}
+
+.daily-welcome__card p {
+  max-width: 40ch;
+  color: var(--color-muted);
+}
+
+.daily-welcome__eyebrow {
+  color: var(--color-copper-hover);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.daily-welcome__button {
+  min-width: 180px;
+}

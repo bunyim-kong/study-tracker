@@ -1,0 +1,150 @@
+.session-detail {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.session-detail__stack {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.session-detail__content h2,
+.session-detail__stack h2 {
+  margin-bottom: var(--space-2);
+}
+
+.session-detail__content > p,
+.session-detail__stack p {
+  color: var(--color-muted);
+}
+
+.resource-list {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.resource-list a {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-deep);
+  color: var(--color-text);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.resource-list a:hover {
+  color: var(--color-yellow);
+}
+
+.resource-list svg {
+  width: 20px;
+  flex: 0 0 auto;
+}
+
+.code-path {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--color-bg-deep);
+}
+
+.code-path code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--color-yellow);
+}
+
+.self-checks {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  border: 0;
+  padding: 0;
+}
+
+.self-checks legend {
+  margin-bottom: var(--space-3);
+  font-weight: 800;
+}
+
+.self-checks label {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--color-bg-deep);
+  cursor: pointer;
+}
+
+.self-checks input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--color-green);
+}
+
+.session-detail__action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: rgb(31 42 77 / 42%);
+}
+
+.session-detail__action > span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.session-detail__action > span svg {
+  color: var(--color-green-text);
+}
+
+.session-celebration {
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-4);
+}
+
+.session-celebration h2,
+.session-celebration p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .code-path,
+  .session-detail__action,
+  .session-celebration {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .session-celebration {
+    align-items: center;
+    text-align: center;
+  }
+
+  .session-detail__action .button {
+    width: 100%;
+  }
+}

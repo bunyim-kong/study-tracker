@@ -1,0 +1,100 @@
+.week-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.week-card {
+  position: relative;
+  min-width: 0;
+  min-height: 170px;
+  display: block;
+  border: 1px solid rgb(241 244 255 / 9%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.week-card[href]:hover {
+  background: var(--color-card-2);
+  translate: 0 -2px;
+}
+
+.week-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.week-card h2 {
+  margin-bottom: var(--space-2);
+}
+
+.week-card p {
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+}
+
+.week-card__status {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-3);
+  background: rgb(241 244 255 / 8%);
+}
+
+.week-card__status svg {
+  width: 16px;
+}
+
+.week-card__status--done {
+  background: rgb(74 222 128 / 14%);
+  color: var(--color-green-text);
+}
+
+.week-card__status--today {
+  background: rgb(255 216 77 / 14%);
+  color: var(--color-yellow);
+}
+
+.week-card__status--missed {
+  color: var(--color-danger-text);
+}
+
+.week-card__arrow {
+  position: absolute;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  color: var(--color-muted);
+}
+
+.week-card--upcoming {
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+@media (min-width: 700px) {
+  .week-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .week-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .week-card:first-child {
+    grid-column: span 2;
+  }
+}

@@ -1,0 +1,22 @@
+.state-panel {
+  width: min(100%, 620px);
+  min-height: 360px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-3);
+  margin: var(--space-6) auto;
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.state-panel h1,
+.state-panel h2,
+.state-panel p {
+  margin-bottom: 0;
+}
+
+.state-panel p {
+  max-width: 48ch;
+  color: var(--color-muted);
+}

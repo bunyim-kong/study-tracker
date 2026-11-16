@@ -24,6 +24,7 @@ describe('date helpers', () => {
 
   it('maps a local date to a one-based plan day', () => {
     expect(getPlanDayNumber('2026-11-14', new Date(2026, 10, 16))).toBe(3)
+    expect(getPlanDayNumber('2026-11-17', new Date(2026, 10, 16))).toBe(0)
   })
 
   it('rejects malformed and impossible dates', () => {

@@ -1,0 +1,83 @@
+.note-page {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.note-prompt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.note-prompt h2 {
+  margin-bottom: var(--space-2);
+}
+
+.note-prompt p {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.note-fields {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.note-fields .field {
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.note-save-status {
+  position: sticky;
+  bottom: 92px;
+  width: fit-content;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  margin: var(--space-4) 0 var(--space-6) auto;
+  border-radius: var(--radius-pill);
+  padding-inline: var(--space-4);
+  background: var(--color-bg-deep);
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.note-save-status--saved {
+  color: var(--color-green-text);
+}
+
+.mentor-comment {
+  position: relative;
+  border: 2px solid rgb(255 216 77 / 24%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: rgb(255 216 77 / 9%);
+}
+
+.mentor-comment span {
+  color: var(--color-yellow);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+.mentor-comment p {
+  margin: var(--space-2) 0 0;
+}
+
+@media (max-width: 560px) {
+  .note-prompt {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .note-save-status {
+    bottom: var(--space-4);
+  }
+}

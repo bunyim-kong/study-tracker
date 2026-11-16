@@ -1,6 +1,7 @@
+import { forwardRef } from 'react'
 import './Button.css'
 
-export default function Button({
+const Button = forwardRef(function Button({
   children,
   variant = 'primary',
   size = 'medium',
@@ -11,13 +12,14 @@ export default function Button({
   disabled,
   type = 'button',
   ...props
-}) {
+}, ref) {
   const classes = ['button', `button--${variant}`, `button--${size}`, className]
     .filter(Boolean)
     .join(' ')
 
   return (
     <button
+      ref={ref}
       className={classes}
       type={type}
       disabled={disabled || loading}
@@ -30,4 +32,6 @@ export default function Button({
       {!loading && Icon && iconPosition === 'end' ? <Icon size={20} aria-hidden="true" /> : null}
     </button>
   )
-}
+})
+
+export default Button

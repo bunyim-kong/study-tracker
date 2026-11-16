@@ -1,0 +1,114 @@
+.today-hero {
+  min-height: 330px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background:
+    radial-gradient(ellipse at 85% 18%, rgb(255 255 255 / 6%) 0 16%, transparent 16.5%),
+    var(--color-card);
+}
+
+.today-hero__copy {
+  z-index: 1;
+}
+
+.today-hero__copy h2 {
+  max-width: 18ch;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+}
+
+.today-hero__copy p {
+  max-width: 48ch;
+  color: var(--color-muted);
+}
+
+.today-hero__eyebrow,
+.section-heading span {
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.today-hero .mascot {
+  justify-self: center;
+  grid-row: 1;
+}
+
+.today-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.today-stats__progress {
+  grid-column: 1 / -1;
+}
+
+.today-stat {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+}
+
+.today-stat svg {
+  color: var(--color-yellow);
+}
+
+.today-stat strong {
+  font-size: var(--font-size-xl);
+  font-variant-numeric: tabular-nums;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+}
+
+.section-heading > svg {
+  color: var(--color-copper-hover);
+}
+
+.finish-trophy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4);
+  background: rgb(255 216 77 / 14%);
+  color: var(--color-yellow);
+}
+
+@media (min-width: 700px) {
+  .today-hero {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+
+  .today-hero .mascot {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .today-stats {
+    grid-template-columns: minmax(0, 2fr) 1fr 1fr;
+  }
+
+  .today-stats__progress {
+    grid-column: auto;
+  }
+}

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Moon, Play, RotateCcw, Sparkles, Sun } from 'lucide-react'
 import { Button, Card, Confetti, Mascot, ProgressBar } from '../components/index.js'
+import { useTheme } from '../context/ThemeContext.jsx'
 import './StyleGuidePage.css'
 
 const MOODS = [
@@ -124,12 +125,7 @@ function PreviewFrame({ type, children }) {
 }
 
 export default function StyleGuidePage() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('study-tracker:theme') || 'dark')
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('study-tracker:theme', theme)
-  }, [theme])
+  const { theme, setTheme } = useTheme()
 
   const isDark = theme === 'dark'
 

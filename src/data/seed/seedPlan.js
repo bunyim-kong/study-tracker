@@ -1,3 +1,5 @@
+import { addDays, toLocalDateKey } from '../../lib/dates.js'
+
 const DEFAULT_SESSIONS = [
   { type: 'research', startTime: '20:00', endTime: '20:30', title: 'Explore the idea' },
   { type: 'practice', startTime: '20:30', endTime: '21:35', title: 'Build it yourself' },
@@ -113,9 +115,14 @@ export const seedPlan = {
 export const demoCredentials = Object.freeze({
   admin: { email: 'admin@studytracker.local', password: 'DemoAdmin123!' },
   learner: { email: 'maya@example.com', password: 'DemoLearner123!' },
+  learnerWithoutPlan: { email: 'noah@example.com', password: 'DemoLearner123!' },
 })
 
-export function createSeedState() {
+export function createSeedState(today = new Date()) {
+  const todayKey = toLocalDateKey(today)
+  const startDate = addDays(todayKey, -2)
+  const dayOneDate = startDate
+  const dayTwoDate = addDays(startDate, 1)
   const profiles = [
     {
       id: 'user-admin-demo',
@@ -124,7 +131,7 @@ export function createSeedState() {
       role: 'admin',
       active: true,
       mustChangePassword: false,
-      createdAt: '2026-01-01T08:00:00.000Z',
+      createdAt: `${addDays(todayKey, -14)}T08:00:00.000Z`,
     },
     {
       id: 'user-learner-maya',
@@ -133,7 +140,7 @@ export function createSeedState() {
       role: 'learner',
       active: true,
       mustChangePassword: false,
-      createdAt: '2026-01-02T08:00:00.000Z',
+      createdAt: `${addDays(todayKey, -10)}T08:00:00.000Z`,
     },
     {
       id: 'user-learner-noah',
@@ -142,14 +149,18 @@ export function createSeedState() {
       role: 'learner',
       active: true,
       mustChangePassword: false,
-      createdAt: '2026-01-03T08:00:00.000Z',
+      createdAt: `${addDays(todayKey, -9)}T08:00:00.000Z`,
     },
   ]
 
   const accounts = [
     { userId: 'user-admin-demo', email: demoCredentials.admin.email, password: demoCredentials.admin.password },
     { userId: 'user-learner-maya', email: demoCredentials.learner.email, password: demoCredentials.learner.password },
-    { userId: 'user-learner-noah', email: 'noah@example.com', password: 'DemoLearner123!' },
+    {
+      userId: 'user-learner-noah',
+      email: demoCredentials.learnerWithoutPlan.email,
+      password: demoCredentials.learnerWithoutPlan.password,
+    },
   ]
 
   const progress = [
@@ -157,24 +168,18 @@ export function createSeedState() {
       learnerId: 'user-learner-maya',
       sessionId: session.id,
       done: true,
-      doneAt: `2026-01-05T${String(13 + index).padStart(2, '0')}:00:00.000Z`,
+      doneAt: `${dayOneDate}T${String(13 + index).padStart(2, '0')}:00:00.000Z`,
     })),
-    ...seedPlan.days[1].sessions.slice(0, 2).map((session, index) => ({
+    ...seedPlan.days[1].sessions.map((session, index) => ({
       learnerId: 'user-learner-maya',
       sessionId: session.id,
       done: true,
-      doneAt: `2026-01-06T${String(13 + index).padStart(2, '0')}:00:00.000Z`,
+      doneAt: `${dayTwoDate}T${String(13 + index).padStart(2, '0')}:00:00.000Z`,
     })),
-    {
-      learnerId: 'user-learner-noah',
-      sessionId: seedPlan.days[0].sessions[0].id,
-      done: true,
-      doneAt: '2026-01-08T13:00:00.000Z',
-    },
   ]
 
   return {
-    version: 1,
+    version: 2,
     session: null,
     accounts,
     profiles,
@@ -184,13 +189,7 @@ export function createSeedState() {
         id: 'assignment-maya-react',
         learnerId: 'user-learner-maya',
         planId: seedPlan.id,
-        startDate: '2026-01-05',
-      },
-      {
-        id: 'assignment-noah-react',
-        learnerId: 'user-learner-noah',
-        planId: seedPlan.id,
-        startDate: '2026-01-08',
+        startDate,
       },
     ],
     progress,
@@ -204,7 +203,18 @@ export function createSeedState() {
         remember: 'Props flow down.',
         question: 'How small should a component be?',
         mentorComment: 'Great question—we will practice that judgment all week.',
-        updatedAt: '2026-01-05T15:00:00.000Z',
+        updatedAt: `${dayOneDate}T15:00:00.000Z`,
+      },
+      {
+        learnerId: 'user-learner-maya',
+        dayId: 'day-react-2',
+        learned: 'State lets a component remember values between renders.',
+        built: 'A counter and a small todo list.',
+        confused: 'Why state updates can be batched.',
+        remember: 'Update arrays without mutating them.',
+        question: 'When should state move to a parent?',
+        mentorComment: '',
+        updatedAt: `${dayTwoDate}T15:00:00.000Z`,
       },
     ],
   }

@@ -1,0 +1,76 @@
+.settings-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.settings-grid .card h2 {
+  margin-bottom: var(--space-4);
+}
+
+.settings-readonly,
+.settings-copy {
+  color: var(--color-muted);
+}
+
+.settings-readonly {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  border-radius: var(--radius-md);
+  padding-inline: var(--space-4);
+  background: var(--color-bg-deep);
+}
+
+.theme-options,
+.settings-actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.theme-option {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-deep);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.theme-option--active {
+  border-color: var(--color-yellow);
+}
+
+.theme-option > span {
+  display: grid;
+}
+
+.theme-option small {
+  color: var(--color-muted);
+}
+
+.settings-actions .button {
+  width: 100%;
+}
+
+.settings-status {
+  min-height: 32px;
+  margin-top: var(--space-4);
+  color: var(--color-green-text);
+  font-weight: 800;
+  text-align: right;
+}
+
+@media (min-width: 760px) {
+  .settings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .theme-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}

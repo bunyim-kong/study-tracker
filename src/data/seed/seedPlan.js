@@ -112,6 +112,30 @@ export const seedPlan = {
   }),
 }
 
+function createDemoLearnerPlan() {
+  const planId = 'plan-react-maya'
+  return {
+    ...structuredClone(seedPlan),
+    id: planId,
+    title: `${seedPlan.title} - Maya`,
+    templateId: seedPlan.id,
+    isLearnerCopy: true,
+    days: seedPlan.days.map((day) => {
+      const dayId = `day-maya-${day.dayNumber}`
+      return {
+        ...structuredClone(day),
+        id: dayId,
+        planId,
+        sessions: day.sessions.map((session) => ({
+          ...structuredClone(session),
+          id: `session-maya-${day.dayNumber}-${session.type}`,
+          dayId,
+        })),
+      }
+    }),
+  }
+}
+
 export const demoCredentials = Object.freeze({
   admin: { email: 'admin@studytracker.local', password: 'DemoAdmin123!' },
   learner: { email: 'maya@example.com', password: 'DemoLearner123!' },
@@ -123,6 +147,7 @@ export function createSeedState(today = new Date()) {
   const startDate = addDays(todayKey, -2)
   const dayOneDate = startDate
   const dayTwoDate = addDays(startDate, 1)
+  const learnerPlan = createDemoLearnerPlan()
   const profiles = [
     {
       id: 'user-admin-demo',
@@ -164,13 +189,13 @@ export function createSeedState(today = new Date()) {
   ]
 
   const progress = [
-    ...seedPlan.days[0].sessions.map((session, index) => ({
+    ...learnerPlan.days[0].sessions.map((session, index) => ({
       learnerId: 'user-learner-maya',
       sessionId: session.id,
       done: true,
       doneAt: `${dayOneDate}T${String(13 + index).padStart(2, '0')}:00:00.000Z`,
     })),
-    ...seedPlan.days[1].sessions.map((session, index) => ({
+    ...learnerPlan.days[1].sessions.map((session, index) => ({
       learnerId: 'user-learner-maya',
       sessionId: session.id,
       done: true,
@@ -179,16 +204,16 @@ export function createSeedState(today = new Date()) {
   ]
 
   return {
-    version: 2,
+    version: 3,
     session: null,
     accounts,
     profiles,
-    plans: [seedPlan],
+    plans: [seedPlan, learnerPlan],
     assignments: [
       {
         id: 'assignment-maya-react',
         learnerId: 'user-learner-maya',
-        planId: seedPlan.id,
+        planId: learnerPlan.id,
         startDate,
       },
     ],
@@ -196,7 +221,7 @@ export function createSeedState(today = new Date()) {
     notes: [
       {
         learnerId: 'user-learner-maya',
-        dayId: 'day-react-1',
+        dayId: 'day-maya-1',
         learned: 'Props let one component render different data.',
         built: 'Three profile cards from an array.',
         confused: 'When to split a component.',
@@ -207,7 +232,7 @@ export function createSeedState(today = new Date()) {
       },
       {
         learnerId: 'user-learner-maya',
-        dayId: 'day-react-2',
+        dayId: 'day-maya-2',
         learned: 'State lets a component remember values between renders.',
         built: 'A counter and a small todo list.',
         confused: 'Why state updates can be batched.',

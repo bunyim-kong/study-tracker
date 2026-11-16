@@ -1,0 +1,105 @@
+.plan-day-editor + .plan-day-editor {
+  margin-top: var(--space-4);
+}
+
+.plan-day-editor__heading {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) auto auto;
+  align-items: end;
+  gap: var(--space-3);
+}
+
+.plan-day-editor__session-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.plan-day-editor__session-heading h3 {
+  margin-bottom: 0;
+}
+
+.plan-day-editor__empty {
+  color: var(--color-muted);
+}
+
+.plan-session-list {
+  display: grid;
+  margin-top: var(--space-3);
+  border: 1px solid rgb(241 244 255 / 9%);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.plan-session-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 62px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg-deep);
+}
+
+.plan-session-row + .plan-session-row {
+  border-top: 1px solid rgb(241 244 255 / 8%);
+}
+
+.plan-session-row__order {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: center;
+}
+
+.plan-session-row__copy {
+  min-width: 0;
+  display: grid;
+}
+
+.plan-session-row__copy small {
+  color: var(--color-muted);
+}
+
+.plan-session-row__actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.plan-session-row__actions .button {
+  min-width: 44px;
+  padding-inline: var(--space-2);
+}
+
+@media (max-width: 860px) {
+  .plan-day-editor__heading {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .plan-day-editor__heading .button {
+    width: 100%;
+  }
+
+  .plan-session-row {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .plan-session-row__actions {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .plan-day-editor__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-session-row__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,30 @@
+.admin-state {
+  min-height: 320px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-3);
+  border: 1px dashed rgb(241 244 255 / 16%);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.admin-state h2,
+.admin-state p {
+  margin-bottom: 0;
+}
+
+.admin-state svg {
+  width: 34px;
+  height: 34px;
+}
+
+.admin-state__spinner {
+  animation: admin-spin 900ms linear infinite;
+}
+
+@keyframes admin-spin {
+  to { rotate: 1turn; }
+}

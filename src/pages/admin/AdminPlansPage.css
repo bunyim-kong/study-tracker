@@ -1,0 +1,84 @@
+.admin-create-plan {
+  max-width: 760px;
+  margin-bottom: var(--space-5);
+}
+
+.admin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+.admin-plan-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.admin-plan-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.admin-plan-card__copy {
+  min-width: 0;
+}
+
+.admin-plan-card h2 {
+  margin-block: var(--space-2) var(--space-1);
+}
+
+.admin-plan-card p {
+  max-width: 70ch;
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.admin-plan-card__meta,
+.admin-plan-card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.admin-plan-card__meta {
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.admin-plan-card__actions {
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+.admin-template-badge,
+.admin-copy-badge {
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.65rem;
+  background: rgb(255 216 77 / 12%);
+  color: var(--color-yellow);
+}
+
+.admin-copy-badge {
+  background: rgb(208 138 82 / 15%);
+  color: var(--color-copper-hover);
+}
+
+@media (max-width: 760px) {
+  .admin-plan-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-plan-card__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form-actions {
+    flex-direction: column-reverse;
+  }
+}

@@ -1,6 +1,8 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { LoadingState } from './StatePanel.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
+import { getAdminRouteRedirect } from '../lib/adminGuard.js'
+import { AdminLoading } from './admin/AdminState.jsx'
 
 export function PublicOnlyRoute() {
   const { user, loading } = useAuth()
@@ -20,8 +22,9 @@ export function LearnerRoute() {
 
 export function AdminRoute() {
   const { user, loading } = useAuth()
-  if (loading) return <LoadingState />
-  if (!user) return <Navigate to="/login" replace />
-  if (user.role !== 'admin') return <Navigate to="/app/today" replace />
+  const location = useLocation()
+  if (loading) return <AdminLoading />
+  const redirect = getAdminRouteRedirect(user, location.pathname)
+  if (redirect) return <Navigate to={redirect} replace />
   return <Outlet />
 }

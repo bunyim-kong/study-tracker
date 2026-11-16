@@ -4,6 +4,7 @@ export const REQUIRED_ADAPTER_METHODS = Object.freeze([
   'getCurrentUser',
   'signIn',
   'signOut',
+  'changePassword',
   'registerLearner',
   'getLearners',
   'getPlans',
@@ -21,6 +22,24 @@ export const REQUIRED_ADAPTER_METHODS = Object.freeze([
   'updateMyProfile',
   'exportMyData',
   'exportData',
+  'listLearners',
+  'getLearnerOverview',
+  'listNotesForLearner',
+  'setMentorComment',
+  'setLearnerActive',
+  'listPlans',
+  'createPlan',
+  'updatePlan',
+  'deletePlan',
+  'duplicatePlan',
+  'upsertDay',
+  'deleteDay',
+  'upsertSession',
+  'deleteSession',
+  'reorderSessions',
+  'assignPlan',
+  'listAssignments',
+  'exportAllData',
 ])
 
 export function assertDataAdapter(adapter) {
@@ -37,5 +56,5 @@ export function getDataAdapter(mode = import.meta.env.VITE_DATA_MODE || 'mock') 
   if (mode === 'mock') return assertDataAdapter(mockAdapter)
 
   // The Supabase implementation belongs to a later stage; fail clearly if enabled early.
-  throw new Error(`Data mode "${mode}" is not available in Stage 2. Use VITE_DATA_MODE=mock.`)
+  throw new Error(`Data mode "${mode}" is not available in Stage 3. Use VITE_DATA_MODE=mock.`)
 }

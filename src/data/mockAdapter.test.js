@@ -53,28 +53,28 @@ describe('mock adapter', () => {
 
   it('persists setSessionDone progress between adapter instances', async () => {
     await adapter.signIn(demoCredentials.learner)
-    await adapter.setSessionDone('session-react-3-practice', true)
+    await adapter.setSessionDone('session-maya-3-practice', true)
 
     const reloadedAdapter = createMockAdapter({ storage })
     await reloadedAdapter.signIn(demoCredentials.learner)
     expect(await reloadedAdapter.getProgress()).toContainEqual(
-      expect.objectContaining({ sessionId: 'session-react-3-practice', done: true }),
+      expect.objectContaining({ sessionId: 'session-maya-3-practice', done: true }),
     )
   })
 
   it('gets, saves and lists notes without allowing a learner to edit mentor comments', async () => {
     await adapter.signIn(demoCredentials.learner)
-    expect(await adapter.getNote('day-react-1')).toMatchObject({ learned: expect.any(String) })
+    expect(await adapter.getNote('day-maya-1')).toMatchObject({ learned: expect.any(String) })
 
     await adapter.saveNote({
-      dayId: 'day-react-3',
+      dayId: 'day-maya-3',
       learned: 'Forms connect values to state.',
       mentorComment: 'Learners must not write this.',
     })
-    const saved = await adapter.getNote('day-react-3')
+    const saved = await adapter.getNote('day-maya-3')
     expect(saved.learned).toBe('Forms connect values to state.')
     expect(saved.mentorComment).toBe('')
-    expect((await adapter.listNotes())[0].dayId).toBe('day-react-3')
+    expect((await adapter.listNotes())[0].dayId).toBe('day-maya-3')
   })
 
   it('always registers new users as unassigned learners', async () => {
@@ -107,11 +107,90 @@ describe('mock adapter', () => {
       initialState: createSeedState(new Date(2026, 10, 16)),
     })
     await expect(fallbackAdapter.signIn(demoCredentials.learner)).resolves.toMatchObject({ role: 'learner' })
-    await expect(fallbackAdapter.getMyAssignment()).resolves.toMatchObject({ planId: seedPlan.id })
+    await expect(fallbackAdapter.getMyAssignment()).resolves.toMatchObject({ planId: 'plan-react-maya' })
 
     const noBrowserStorageAdapter = createMockAdapter({
       initialState: createSeedState(new Date(2026, 10, 16)),
     })
     await expect(noBrowserStorageAdapter.signIn(demoCredentials.admin)).resolves.toMatchObject({ role: 'admin' })
+  })
+
+  it('rejects every admin operation when the current user is a learner', async () => {
+    await adapter.signIn(demoCredentials.learner)
+    const operations = [
+      () => adapter.listLearners(),
+      () => adapter.getLearnerOverview('user-learner-maya'),
+      () => adapter.listNotesForLearner('user-learner-maya'),
+      () => adapter.setMentorComment({ learnerId: 'user-learner-maya', dayId: 'day-maya-1', mentorComment: '' }),
+      () => adapter.setLearnerActive('user-learner-maya', false),
+      () => adapter.listPlans(),
+      () => adapter.getPlan(seedPlan.id),
+      () => adapter.createPlan({ title: 'No', description: '' }),
+      () => adapter.updatePlan(seedPlan.id, { title: 'No', description: '' }),
+      () => adapter.deletePlan(seedPlan.id),
+      () => adapter.duplicatePlan(seedPlan.id),
+      () => adapter.upsertDay(seedPlan.id, { dayNumber: 8, topic: 'No' }),
+      () => adapter.deleteDay(seedPlan.id, 'day-react-1'),
+      () => adapter.upsertSession(seedPlan.id, 'day-react-1', {}),
+      () => adapter.deleteSession(seedPlan.id, 'day-react-1', 'session-react-1-research'),
+      () => adapter.reorderSessions(seedPlan.id, 'day-react-1', []),
+      () => adapter.assignPlan('user-learner-noah', seedPlan.id, '2026-11-16'),
+      () => adapter.listAssignments(),
+      () => adapter.exportAllData(),
+    ]
+
+    for (const operation of operations) {
+      await expect(operation()).rejects.toThrow('Permission denied: admin access required.')
+    }
+  })
+
+  it('assignPlan deep-copies every day and session before creating the assignment', async () => {
+    await adapter.signIn(demoCredentials.admin)
+    const templateBefore = await adapter.getPlan(seedPlan.id)
+    const result = await adapter.assignPlan('user-learner-noah', seedPlan.id, '2026-11-16')
+
+    expect(result.plan.title).toBe('React in 7 days - Noah')
+    expect(result.plan.id).not.toBe(templateBefore.id)
+    expect(result.plan.days[0].id).not.toBe(templateBefore.days[0].id)
+    expect(result.plan.days[0].sessions[0].id).not.toBe(templateBefore.days[0].sessions[0].id)
+
+    await adapter.upsertDay(result.plan.id, { ...result.plan.days[0], topic: 'Noah’s custom topic' })
+    expect((await adapter.getPlan(result.plan.id)).days[0].topic).toBe('Noah’s custom topic')
+    expect((await adapter.getPlan(seedPlan.id)).days[0].topic).toBe(templateBefore.days[0].topic)
+  })
+
+  it('blocks deletion of a plan that has an assignment', async () => {
+    await adapter.signIn(demoCredentials.admin)
+    await expect(adapter.deletePlan('plan-react-maya')).rejects.toThrow('has an assignment')
+  })
+
+  it('supports validated plan, day, session, reorder, and duplicate operations', async () => {
+    await adapter.signIn(demoCredentials.admin)
+    const plan = await adapter.createPlan({ title: 'Testing plan', description: 'Adapter round trip' })
+    const day = await adapter.upsertDay(plan.id, { dayNumber: 1, topic: 'Testing basics' })
+    const first = await adapter.upsertSession(plan.id, day.id, {
+      type: 'research', startTime: '20:00', endTime: '20:30', title: 'Read', resources: [], practicePath: '', exercise: '',
+    })
+    const second = await adapter.upsertSession(plan.id, day.id, {
+      type: 'practice', startTime: '20:30', endTime: '21:00', title: 'Build', resources: [], practicePath: 'src/test.js', exercise: 'Write a test.',
+    })
+    expect((await adapter.reorderSessions(plan.id, day.id, [second.id, first.id])).map((session) => session.id)).toEqual([second.id, first.id])
+    const duplicate = await adapter.duplicatePlan(plan.id)
+    expect(duplicate.title).toBe('Testing plan (Copy)')
+    expect(duplicate.days[0].sessions[0].id).not.toBe(second.id)
+    await adapter.deleteSession(plan.id, day.id, first.id)
+    await adapter.deleteDay(plan.id, day.id)
+    await expect(adapter.deletePlan(plan.id)).resolves.toBeUndefined()
+  })
+
+  it('completes the forced password-change flow and clears the profile flag', async () => {
+    const forcedState = createSeedState(new Date(2026, 10, 16))
+    forcedState.profiles.find((profile) => profile.id === 'user-admin-demo').mustChangePassword = true
+    const forcedAdapter = createMockAdapter({ storage: makeStorage(), initialState: forcedState })
+    await forcedAdapter.signIn(demoCredentials.admin)
+    await expect(forcedAdapter.changePassword({ currentPassword: 'wrong', newPassword: 'NewAdminPass123!' })).rejects.toThrow('incorrect')
+    await expect(forcedAdapter.changePassword({ currentPassword: demoCredentials.admin.password, newPassword: 'NewAdminPass123!' })).resolves.toMatchObject({ mustChangePassword: false })
+    await forcedAdapter.signOut()
+    await expect(forcedAdapter.signIn({ email: demoCredentials.admin.email, password: 'NewAdminPass123!' })).resolves.toMatchObject({ role: 'admin' })
   })
 })

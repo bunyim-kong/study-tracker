@@ -1,0 +1,40 @@
+.confirm-dialog__backdrop {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  background: var(--color-scrim);
+  backdrop-filter: blur(5px);
+}
+
+.confirm-dialog {
+  width: min(100%, 480px);
+  border: 1px solid rgb(241 244 255 / 14%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  background: var(--color-card);
+  box-shadow: 0 30px 90px rgb(7 12 27 / 45%);
+}
+
+.confirm-dialog h2 {
+  margin-bottom: var(--space-3);
+}
+
+.confirm-dialog__copy {
+  color: var(--color-muted);
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 420px) {
+  .confirm-dialog__actions {
+    flex-direction: column-reverse;
+  }
+}

@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import LearnerLayout from './components/LearnerLayout.jsx'
+import AdminLayout from './components/AdminLayout.jsx'
 import { AdminRoute, LearnerRoute, PublicOnlyRoute } from './components/RouteGuards.jsx'
 import { LearnerDataProvider } from './context/LearnerDataContext.jsx'
-import AdminPlaceholderPage from './pages/AdminPlaceholderPage.jsx'
 import BadgesPage from './pages/BadgesPage.jsx'
 import DayPage from './pages/DayPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
@@ -14,6 +14,13 @@ import SettingsPage from './pages/SettingsPage.jsx'
 import StyleGuidePage from './pages/StyleGuidePage.jsx'
 import TodayPage from './pages/TodayPage.jsx'
 import WeekPage from './pages/WeekPage.jsx'
+import AdminAssignPage from './pages/admin/AdminAssignPage.jsx'
+import AdminChangePasswordPage from './pages/admin/AdminChangePasswordPage.jsx'
+import AdminDashboardPage from './pages/admin/AdminDashboardPage.jsx'
+import AdminLearnerPage from './pages/admin/AdminLearnerPage.jsx'
+import AdminPlanEditorPage from './pages/admin/AdminPlanEditorPage.jsx'
+import AdminPlansPage from './pages/admin/AdminPlansPage.jsx'
+import AdminSettingsPage from './pages/admin/AdminSettingsPage.jsx'
 
 export default function App() {
   return (
@@ -24,7 +31,15 @@ export default function App() {
       </Route>
 
       <Route element={<AdminRoute />}>
-        <Route path="/admin" element={<AdminPlaceholderPage />} />
+        <Route path="/admin/change-password" element={<AdminChangePasswordPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboardPage />} />
+          <Route path="learners/:id" element={<AdminLearnerPage />} />
+          <Route path="plans" element={<AdminPlansPage />} />
+          <Route path="plans/:id" element={<AdminPlanEditorPage />} />
+          <Route path="assign" element={<AdminAssignPage />} />
+          <Route path="settings" element={<AdminSettingsPage />} />
+        </Route>
       </Route>
 
       <Route element={<LearnerRoute />}>

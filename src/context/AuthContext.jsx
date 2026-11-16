@@ -58,6 +58,11 @@ export function AuthProvider({ children }) {
         setUser(updatedUser)
         return updatedUser
       },
+      async changePassword(details) {
+        const updatedUser = await adapter.changePassword(details)
+        setUser(updatedUser)
+        return updatedUser
+      },
       refreshUser,
     }),
     [adapter, loading, notice, refreshUser, user],
